@@ -22,6 +22,7 @@ public class ReviewEndpoints {
   public Response search(@PathParam("title") String reviewTitle) {
 
     // Call our controller-layer in order to get the order from the DB
+
     ArrayList<Review> reviews = ReviewController.searchByTitle(reviewTitle);
 
     // TODO: Add Encryption to JSON (FIX)
