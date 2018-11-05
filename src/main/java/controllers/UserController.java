@@ -139,7 +139,7 @@ public class UserController {
 
     try {
 
-      PreparedStatement updateUser = DatabaseController.getConnection().prepareStatement("UPDATE user SET\" + \"first_name = ?,\" + \"last_name = ?,\" + \"password = ?,\" + \"email = ?,\" + \"WHERE id = ?\"");
+      PreparedStatement updateUser = DatabaseController.getConnection().prepareStatement("UPDATE user SET first_name = ?, last_name = ?,password = ?,email = ? WHERE id = ?");
 
       updateUser.setString(1, user.getFirstname());
       updateUser.setString(2, user.getLastname());
@@ -154,5 +154,23 @@ public class UserController {
     }
 
     return user;
+  }
+
+
+public static User deleteUser (User user) {
+  if (dbCon == null){
+    dbCon = new DatabaseController();
+  }
+
+  try {
+    PreparedStatement deleteUser = dbCon.getConnection().prepareStatement("DELETE FROM user WHERE id = ? ");
+    deleteUser.setInt(1, user.getId());
+
+    deleteUser.executeUpdate();
+  }
+  catch (SQLException sql){
+    sql.printStackTrace();
+  }
+  return user;
   }
 }
