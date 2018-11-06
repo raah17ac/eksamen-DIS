@@ -94,7 +94,7 @@ public class UserEndpoints {
     return Response.status(400).entity("Endpoint not implemented yet").build();
   }
 
-  // TODO: Make the system able to delete users
+  // TODO: Make the system able to delete users (FIX)
   @DELETE
   @Path("/{idUser}")
   @Consumes(MediaType.APPLICATION_JSON)
