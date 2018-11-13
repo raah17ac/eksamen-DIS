@@ -199,33 +199,33 @@ public static User deleteUser (User user) {
 
       if (resultSet.next()) {
         userLogin = new User(
-             resultSet.getInt("id"),
-             resultSet.getString("first_name"),
-             resultSet.getString("last_name"),
-             resultSet.getString("password"),
-             resultSet.getString("email"));
+        resultSet.getInt("id"),
+        resultSet.getString("first_name"),
+        resultSet.getString("last_name"),
+        resultSet.getString("password"),
+        resultSet.getString("email"));
 
         if (userLogin !=null){
-          try {
-            Algorithm algorithm = Algorithm.HMAC256("secret");
-            token = JWT.create()
-                    .withClaim("userID", user.getId())
-                    .withIssuer("auth0")
-                    .sign(algorithm);
+        try {
+        Algorithm algorithm = Algorithm.HMAC256("secret");
+        token = JWT.create()
+        .withClaim("userID", user.getId())
+        .withIssuer("auth0")
+        .sign(algorithm);
 
-          }catch (JWTCreationException ex){
+        }catch (JWTCreationException ex){
 
-          }finally {
-            return token;
-          }
+        }finally {
+        return token;
+        }
 
         }
-      }else {
+        }else {
         System.out.println("User not find");
-      }
-    }catch (SQLException ex){
-      ex.printStackTrace();
-    }
-    return "";
-  }
-}
+        }
+        }catch (SQLException ex){
+        ex.printStackTrace();
+        }
+        return "";
+        }
+        }
