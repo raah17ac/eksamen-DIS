@@ -108,21 +108,18 @@ public class UserEndpoints {
 
   // TODO: Make the system able to delete users (FIX)
   @DELETE
-  @Path("/{idUser}")
+  @Path("/{userId}/{token}")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response deleteUser (@PathParam("idUser") int idUser) {
+  public Response deleteUser(@PathParam("userId") int userId,@PathParam("token")String token) {
 
-    User deleteUser1= UserController.getUser(idUser);
-    User deleteUser2= UserController.deleteUser(deleteUser1);
-    String json = new Gson().toJson(deleteUser2);
+    Boolean userDeleted = UserController.deleteUser(token);
 
-    if (deleteUser2 != null){
+    if (userDeleted){
       // Return a response with status 200 and JSON as type
-      return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
+      return Response.status(200).entity("User deleted").build();
     }
-
     else {
-      return Response.status(400).entity("Endpoint not implemented yet").build();
+      return Response.status(400).entity("Could'nt delete user").build();
     }
 
   }
@@ -130,22 +127,20 @@ public class UserEndpoints {
   // TODO: Make the system able to update users (FIX)
 
   @PUT
-  @Path("/{idUser}")
+  @Path("/{token}")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response updateUser(String x) {
+  public Response updateUser(@PathParam("token") String token, String x) {
 
     User UserUpdate = new Gson().fromJson(x, User.class);
 
-    User updateUser = UserController.updateUser(UserUpdate);
+    Boolean updated = UserController.updateUser(UserUpdate, token);
 
-    String json = new Gson().toJson(updateUser);
 
-    if (updateUser !=null) {
+    if (updated) {
 
       // Return a response with status 200 and JSON as type
-      return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
-  }
-  else {
+      return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity("User is updated").build();
+  } else {
       return Response.status(400).entity("Endpoint is not updated").build();
     }
   }
