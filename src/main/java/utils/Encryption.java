@@ -14,7 +14,7 @@ public final class Encryption {
       // Stringbuilder enables you to play around with strings and make useful stuff
       StringBuilder thisIsEncrypted = new StringBuilder();
 
-      // TODO: This is where the magic of XOR is happening. Are you able to explain what is going on?
+      // TODO: This is where the magic of XOR is happening. Are you able to explain what is going on? (FIX)
       /**
        * Loopet har en variable som stiger hvergang med 1 når loopet kører
        * Loopet køre konstant, indtil der ikke er flere karakterer i rawString
